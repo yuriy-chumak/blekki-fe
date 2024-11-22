@@ -1,5 +1,20 @@
 # work plan
 
+### 23 nov 2024
+* make master main github branch
+* update CMakeLists.txt (remove glfw folder)
+* add CMakeFiles/ to .gitignore
+
+### 22 nov 2024
+* rotate triangle with matrices
+* draw the sphere with triangles (simplest case - with sin and cos)
+* draw the sphere with triangles (smart case - based on tetrahedron)
+
+### 21 nov 2024
+* .gitignore
+* setup `ol`
+* glBegin/glEnd, glMatrixMode, gluLookAt, glClear, etc.
+
 ### 20 nov 2024
 * інсталювати наступні ліби
   * `libglew-dev`, `libglfw3-dev`, `libsoil-dev`
@@ -9,16 +24,6 @@
   * використати для цього бібліотеку GLFW
   * взяти готовий приклад з https://www.glfw.org/docs/3.3/quick.html, викинути з нього усе стосовно рендерінгу, лишити тільки віконну і клавіатурну логіку
 * компіляцію оформити у вигляді Makefile
-
-### 21 nov 2024
-* .gitignore
-* setup `ol`
-* glBegin/glEnd, glMatrixMode, gluLookAt, glClear, etc.
-
-### 22 nov 2024
-* rotate triangle with matrices
-* draw the sphere with triangles (simplest case - with sin and cos)
-* draw the sphere with triangles (smart case - based on tetrahedron)
 
 ### backlog
 * splash screen (basic texture)
