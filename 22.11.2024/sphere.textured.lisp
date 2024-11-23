@@ -81,8 +81,9 @@
 
       (define (vertex v)
          (vector-apply v (lambda (x y z)
+            (define -z (- z))
             (define phi (\\
-               1.0 - (1.0 + atan(x, - z) / PI) / 2.0
+               1.0 - (1.0 + atan(x, -z) / PI) / 2.0
             ))
             (define theta (\\
                acos(y) / PI
