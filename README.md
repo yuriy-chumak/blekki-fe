@@ -1,5 +1,13 @@
 # work plan
 
+### Prerequisites
+- [x] C++ compiler (g++)
+- [x] CMake
+- [x] GLFW library (`apt install glfw-dev`)
+- [x] Otus Lisp (https://github.com/yuriy-chumak/ol)
+- [ ] MangoHud: https://github.com/flightlessmango/MangoHud
+- ...
+
 ### 23 nov 2024
 - [ ] make master main github branch
 - [ ] update CMakeLists.txt (remove glfw folder)
@@ -37,4 +45,7 @@
 - [ ] planet texturing
 - [ ] space dust
 - [ ] spherical skybox with custom sky textures (bilboarding)
+- [ ] newton-dynamics library
+  - [ ] collisions
+  - [ ] movinf physics
 - ...
