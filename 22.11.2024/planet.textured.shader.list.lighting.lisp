@@ -1,6 +1,7 @@
 #!/usr/bin/env ol
 
 ,include "config.scm"
+(define sun [10 10 -10])
 
 (import (lib glfw))
 (glfwSetErrorCallback
@@ -36,12 +37,16 @@
 "  #version 120 // OpenGL 2.1
 
 varying vec4 vertexPosition;
+varying vec3 vertexNormal;
 
 void main()
 {
    vec4 vertex = gl_Vertex;
 
    vertexPosition = gl_ModelViewMatrix * vertex;
+   vertexNormal = vertex.xyz;
+   //vertexNormal = (gl_ModelViewMatrix * vertex).xyz;
+
    gl_Position = gl_ProjectionMatrix * vertexPosition;
    // положение вершины в базовом пространстве (для текстурирования)
    gl_TexCoord[0] = vertex;
@@ -51,7 +56,10 @@ void main()
 #define PI 3.1415927410125732421875 // IEEE754 Pi Approximation
 
 uniform sampler2D tex0;
+uniform vec3 lightPosition;
+
 varying vec4 vertexPosition;
+varying vec3 vertexNormal;
 
 void main()
 {
@@ -62,8 +70,19 @@ void main()
    float theta = acos(y) / PI;
 
    vec3 vertex = vertexPosition.xyz;
+   vec3 normal = normalize(vertexNormal);
+
+   vec3 lightPos = lightPosition.xyz;
+   // солнце - направленный источник, а не точечный
+   vec3 lightDir = lightPos; // - vertex * lightPos.w;
+   vec3 unitLightDir = normalize(lightDir);
+
+   float diff = dot(normal, unitLightDir);
+   //float diff = max(0.1, dot(normal, unitLightDir));
+   float light = 0.1 + 0.9 * smoothstep(0.0, 1.0, diff);
+
    vec3 color = texture2D(tex0, vec2(phi, theta)).rgb;
-   gl_FragColor = vec4(color, 1.0);
+   gl_FragColor = vec4(color * light, 1.0);
 }"))
 (setq tex0 (glGetUniformLocation shader-program "tex0"))
 (setq lightPosition (glGetUniformLocation shader-program "lightPosition"))
@@ -161,9 +180,6 @@ void main()
          0 0 0
          0 1 0)
 
-      ; draw the geoid
-      (glCallList geoid)
-
       ; сфера
       (glUseProgram shader-program)
       (glColor3f 1 1 1)
@@ -173,6 +189,10 @@ void main()
 
       (glActiveTexture GL_TEXTURE0)
       (glUniform1i tex0 0)
+      (glUniform3fv lightPosition 1 sun)
+
+      ; draw the geoid
+      (glCallList geoid)
 
       (glfwSwapBuffers window)
       (glfwPollEvents) (sleep)
