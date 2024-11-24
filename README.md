@@ -8,6 +8,9 @@
 - [ ] MangoHud: https://github.com/flightlessmango/MangoHud
 - ...
 
+### 24 nov 2024
+- [ ] move sphere creation to the "sphere.c" and "sphere.h".
+
 ### 23 nov 2024
 - [ ] make master main github branch
 - [ ] update CMakeLists.txt (remove glfw folder)
