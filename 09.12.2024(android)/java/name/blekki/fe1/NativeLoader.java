@@ -7,8 +7,8 @@ public class NativeLoader extends android.app.NativeActivity {
 		// thirdparty libraries
         System.loadLibrary("vrapi"); // vrApi (Oculus + Meta)
         System.loadLibrary("gl2es"); // OpenGL 2.1 over GLES
-        // System.loadLibrary("GLU"); // OpenGL Utility Library  (depends on gl2es)
-        // System.loadLibrary("SOIL"); // Image loading Library  (depends on gl2es)
+        System.loadLibrary("GLU"); // OpenGL Utility Library  (depends on gl2es)
+        System.loadLibrary("SOIL"); // Image loading Library  (depends on gl2es)
 
         System.loadLibrary("egl"); // gles
         System.loadLibrary("ovr"); // vr
