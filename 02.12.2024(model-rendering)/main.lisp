@@ -5,15 +5,6 @@
 (gl:enable-vr 'Oculus)
 
 (import (lib soil))
-(define (file->bytevector path)
-   (define (sys:read fd maxlen)
-      (syscall 0 fd maxlen))
-   (define stat (syscall 4 (c-string path)))
-   (when stat
-      (let*((port (open-binary-input-file path))
-            (file (sys:read port (ref stat 8))))
-         (close-port port)
-      file)))
 
 (import (math infix-notation))
 ,load "model.lisp"
@@ -110,9 +101,7 @@ void main()
    ;; draw the spaceship:
    (define t (/ (mod (- (time-ms) old) 30000) #i100))
    (glTranslatef 0 -60 (- (negate t) -100))
-   ;(glTranslatef 0 -60 -100)
    (glScalef 1/3 1/3 1/3)
-   ;(define t (/ (mod (time-ms) 6283) #i1000))
    
    ;(glRotatef (* t 360/3.14) 0 1 0)
 
@@ -123,16 +112,4 @@ void main()
    (glActiveTexture GL_TEXTURE0)
    ;(draw-geometry Carrier-T)
    (draw-textured Carrier-T)
-
-   ;; (draw-Cube)
-   ;; (glBegin GL_QUADS)
-   ;;    (glColor3f 1 0 0)
-   ;;    (glVertex3f -3 +3 -2)
-   ;;    (glColor3f 0 1 0)
-   ;;    (glVertex3f +3 +3 -2)
-   ;;    (glColor3f 0 0 1)
-   ;;    (glVertex3f +3 -3 -2)
-   ;;    (glColor3f 0 1 1)
-   ;;    (glVertex3f -3 -3 -2)
-   ;; (glEnd)
 ))
