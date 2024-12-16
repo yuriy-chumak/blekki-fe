@@ -5,15 +5,9 @@
    (srfi 27))
 
 (export
-
-   ; vector: [x y z]
    vec3 quat ; fast vector and quaternion creation
-   mat3 mat4 ; mat34 are column-major matrices (!)
+   mat3 mat4 ; mat3 mat4 are column-major matrices (!)
 
-   ;vec3+vec3 ; vector+scalar
-   ;vec3-vec3
-   ;vec3scale
-   ; matrix: [4 x 4]
    mat4*vec3 ; matrix * vector
    mat4*vert ; matrix * vertex
    mat4*mat4 ; matrix * matrix
@@ -21,16 +15,13 @@
    ; todo: rename to quat->rotation-matrix
    ;                 quat->rotation-matrix3
    rotation-matrix  ; матрица вращения для кватерниона
-   ;; rotation-matrix3 ; матрица вращения 3x3 (speedup)
    rotation-between ; кватернион вращения между векторами
-   ;translate-matrix ; передвинуть матрицу в точку N
-   ;; distance-between2
 
-   normalize
+   normalize ; normalize vector
+   normalize-quat ; normalize quaternion
    magnitude
    magnitude²
-   ;dot-product
-   conjugate
+   conjugate ; conjugate quaternion
 
    ; расширяем обычную математику векторной
    + - * / ; • ⨯ / ;∇ ² π π² ⨉ ∇ ⊹ ✕
