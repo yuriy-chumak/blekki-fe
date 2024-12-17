@@ -94,17 +94,17 @@
 
    ; Column-major
    (define (mat4*vec3 mat vec)
-      (vector-apply vec (lambda (x y z)
-         (vec3 ; column-major 
-            (+ (* (ref mat 1) x) (* (ref mat 5) y) (* (ref mat 9) z))
-            (+ (* (ref mat 2) x) (* (ref mat 6) y) (* (ref mat A) z))
-            (+ (* (ref mat 3) x) (* (ref mat 7) y) (* (ref mat B) z))
-         ))))
+      (vector-apply vec (lambda (x y z) (\\
+         vec3( ; column-major 
+            ref(mat, 1) * x + ref(mat, 5) * y + ref(mat, 9) * z,
+            ref(mat, 2) * x + ref(mat, 6) * y + ref(mat, A) * z,
+            ref(mat, 3) * x + ref(mat, 7) * y + ref(mat, B) * z
+         )))))
 
    ; Column-major
    (define (mat4*vert mat vec)
       (vector-apply vec (lambda (x y z)
-         (mat4
+         (vec3
             (+ (* (ref mat 1) x) (* (ref mat 5) y) (* (ref mat 9) z)    (ref mat 13))
             (+ (* (ref mat 2) x) (* (ref mat 6) y) (* (ref mat A) z)    (ref mat 14))
             (+ (* (ref mat 3) x) (* (ref mat 7) y) (* (ref mat B) z)    (ref mat 15))
