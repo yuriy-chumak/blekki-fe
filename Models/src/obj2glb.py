@@ -29,6 +29,14 @@ for v in model.data.vertices:
     x, y, z = v.co
     v.co = (-y, z, x)
 
+# Recalculate normals
+model.select_set(True)
+bpy.context.view_layer.objects.active = model
+bpy.ops.object.mode_set(mode='EDIT')
+bpy.ops.mesh.select_all(action='SELECT')
+bpy.ops.mesh.normals_make_consistent(inside=False)
+bpy.ops.object.editmode_toggle()
+
 # reexport GLTF
 bpy.ops.export_scene.gltf(filepath=argv[1]
 	,export_texcoords=True
